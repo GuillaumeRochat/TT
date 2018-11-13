@@ -164,6 +164,9 @@ func normalize(starts []time.Time, stops []time.Time) ([]time.Time, []time.Time,
 		}
 
 		return starts, stops, nil
+	} else if len(starts) == 1 && len(stops) == 0 {
+		stops = append(stops, time.Now())
+		return starts, stops, nil
 	}
 
 	return nil, nil, errors.New("Invalid range of start/stop")
