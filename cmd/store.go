@@ -152,7 +152,7 @@ func stopBeforeStart(start []time.Time, stop []time.Time) bool {
 func normalize(starts []time.Time, stops []time.Time) ([]time.Time, []time.Time, error) {
 	if len(starts) > 0 && len(stops) > 0 {
 		if stopBeforeStart(starts, stops) {
-			starts = starts[1:]
+			stops = stops[1:]
 		}
 
 		if len(starts) != len(stops) {
