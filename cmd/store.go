@@ -54,10 +54,11 @@ func Write(bucketName BucketName, timestamp string) error {
 		stopCursor := stopBucket.Cursor()
 		stop, _ := stopCursor.Last()
 
-		// <= 0 => start is smaller than stop
+		// <= 0 => start is smaller than stop so we can indeed start.
 		if bytes.Compare(start, stop) <= 0 && bucketName == Start {
 			return startBucket.Put([]byte(timestamp), []byte(timestamp))
-		} else if bucketName == Stop {
+			// <= 0 => stop is smaller than start so we can indeed stop.
+		} else if bytes.Compare(stop, start) <= 0 && bucketName == Stop {
 			return stopBucket.Put([]byte(timestamp), []byte(timestamp))
 		}
 		return nil
