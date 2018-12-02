@@ -33,8 +33,6 @@ func getOffsetNow() time.Time {
 	offset := 0
 
 	switch now.Weekday() {
-	case time.Sunday:
-		offset = 0
 	case time.Monday:
 		offset = 1
 	case time.Tuesday:
@@ -47,6 +45,8 @@ func getOffsetNow() time.Time {
 		offset = 5
 	case time.Saturday:
 		offset = 6
+	case time.Sunday:
+		offset = 7
 	}
 
 	return now.AddDate(0, 0, -offset)
